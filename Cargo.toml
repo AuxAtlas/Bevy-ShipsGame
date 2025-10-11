@@ -1,0 +1,19 @@
+[package]
+name = "rust_ships"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+bevy = { version = "0.16", default-features = false, features = ["bevy_state"] }
+godot = "0.3"
+godot-bevy = { version = "0.9.1", features = ["default"] }
+
+[[bin]]
+path = "./run_godot.rs"
+name = "godot"
+
+[workspace]
+# Empty workspace table to make this a standalone project
