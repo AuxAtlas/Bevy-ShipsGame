@@ -7,9 +7,11 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-bevy = { version = "0.16", default-features = false, features = ["bevy_state"] }
+godot-bevy = "0.8.4"  # Latest with opt-in plugin system
+bevy = { version = "0.16", default-features = false }
 godot = "0.3"
-godot-bevy = { version = "0.9.1", features = ["default"] }
+which = "8.0.0"
+bevy_asset_loader = "0.23.0"
 
 [[bin]]
 path = "./run_godot.rs"

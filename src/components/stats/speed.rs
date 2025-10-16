@@ -1,19 +1,16 @@
-use godot::prelude::*;
 use bevy::prelude::*;
-use godot_bevy::prelude::*;
 
-#[derive(Component, Debug, Clone, PartialEq)]
+#[derive(Component)]
 pub struct MoveSpeedStat {
-    pub base_speed : f32,
+    pub base: f32,
     pub multiplier: f32,
 }
 
 impl Default for MoveSpeedStat {
     fn default() -> Self {
         MoveSpeedStat {
-            base_speed: 8.0,
+            base: 8.0,
             multiplier: 1.0,
         }
     }
 }
-

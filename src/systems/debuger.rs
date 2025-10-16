@@ -5,10 +5,11 @@ use bevy::prelude::*;
 use godot::classes::CharacterBody3D;
 use godot::prelude::*;
 use godot_bevy::prelude::*;
+use crate::DebugRemovable;
 
 #[main_thread_system]
 pub fn move_boat(
-    mut query: Query<(&mut GodotNodeHandle, &MoveSpeedStat), (With<CharacterBody3DMarker>, With<Boat>)>,
+    mut query: Query<(&mut GodotNodeHandle), With<DebugRemovable>>,
     time: Res<Time>,
     input_buffer: Res<InputBuffer>) {
     for (mut handle, speed_stat) in query.iter_mut() {

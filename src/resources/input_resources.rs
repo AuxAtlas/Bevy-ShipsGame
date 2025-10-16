@@ -1,6 +1,5 @@
-use godot::prelude::*;
 use bevy::prelude::*;
-use godot_bevy::prelude::*;
+use godot::prelude::*;
 
 #[derive(Resource, Default)]
 pub struct InputBuffer {
