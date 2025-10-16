@@ -1,10 +1,10 @@
-use crate::components::stats::speed::MoveSpeedStat;
 use crate::components::stats::health::HealthStat;
+use crate::components::stats::speed::MoveSpeedStat;
+use bevy_asset_loader::asset_collection::AssetCollection;
 use godot::classes::CharacterBody3D;
 use godot::prelude::*;
 use godot_bevy::prelude::bevy_prelude::*;
 use godot_bevy::prelude::{BevyBundle, GodotResource};
-use bevy_asset_loader::asset_collection::AssetCollection;
 
 #[derive(GodotClass, BevyBundle)]
 #[class(init, base=CharacterBody3D)]

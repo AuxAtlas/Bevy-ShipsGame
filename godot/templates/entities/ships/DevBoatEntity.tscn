@@ -38,8 +38,12 @@ bottom_radius = 0.125
 [node name="DevBoatEntity" type="BoatNode"]
 base_speed = 8.0
 speed_multiplier = 1.0
+health = 100.0
+max_health = 100.0
+axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_z = true
+motion_mode = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
