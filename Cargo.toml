@@ -12,6 +12,11 @@ bevy = { version = "0.16", default-features = false }
 godot = "0.3"
 which = "8.0.0"
 bevy_asset_loader = "0.23.0"
+bevy_quinnet = { version = "0.18.1", features = ["bincode-messages"] }
+strum = "0.27.2"
+strum_macros = "0.27.2"
+serde = { version = "1.0.228", features = ["derive"] }
+rand = "0.8.5"
 
 [[bin]]
 path = "./run_godot.rs"

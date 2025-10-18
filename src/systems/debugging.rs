@@ -16,17 +16,18 @@ impl Plugin for DebuggingPlugin {
                     .continue_to_state(GameState::InGame)
                     .load_collection::<DebugGameAssets>()
             )
-            .add_systems(Update, update_debugger_text.run_if(in_state(GameState::InGame)))
+            .add_systems(Update, debugger_update_system.run_if(in_state(GameState::InGame)))
             .add_systems(OnEnter(GameState::InGame), spawn_debug_tools);
     }
 }
 
 #[main_thread_system]
-pub fn update_debugger_text(
+pub fn debugger_update_system(
                 q_debugger_text_parents: Query<&Children, With<DebuggerText>>,
                 mut q_debugger_text_children: Query<&mut GodotNodeHandle, With<LabelMarker>>,
                 mut q_debug_this_transform : Query<&mut GodotNodeHandle, (With<DebugThisTransformMarker>, Without<LabelMarker>)>,
-                input_buffer: Res<InputBuffer>){
+                input_buffer: Res<InputBuffer>,
+){
     let mut debug_text: String = String::from("[DEBUG]\n");
     debug_text.push_str(format!("INPUT_MOVEMENT: {}\n", input_buffer.get_movements()).as_str());
     for(mut debug_node) in q_debug_this_transform.iter_mut() {
@@ -40,7 +41,6 @@ pub fn update_debugger_text(
             if let Ok(mut label_node) = q_debugger_text_children.get_mut(child) {
                 label_node.get::<Label>().set_text(&debug_text);
             };
-
         }
     }
 }

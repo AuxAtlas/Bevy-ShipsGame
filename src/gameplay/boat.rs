@@ -15,11 +15,21 @@ use godot_bevy::prelude::{BevyBundle, GodotResource};
 pub struct BoatNode {
     base: Base<CharacterBody3D>,
 
-    #[export] base_speed: f32,
-    #[export] speed_multiplier: f32,
+    #[init(val = 5.0)]
+    #[export]
+    base_speed: f32,
 
-    #[export] health: f32,
-    #[export] max_health: f32,
+    #[init(val = 1.0)]
+    #[export]
+    speed_multiplier: f32,
+
+    #[init(val = 100.0)]
+    #[export]
+    health: f32,
+
+    #[init(val = 100.0)]
+    #[export]
+    max_health: f32,
 }
 
 #[derive(Component, Default)]

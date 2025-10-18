@@ -1,4 +1,4 @@
-use crate::entities::boat::{Boat, BoatAssets};
+use crate::gameplay::boat::{Boat, BoatAssets};
 use crate::systems::debugging::DebugThisTransformMarker;
 use crate::GameState;
 use bevy::prelude::*;
@@ -6,9 +6,9 @@ use godot_bevy::prelude::GodotScene;
 
 pub mod boat;
 
-pub struct EntitiesPlugin;
+pub(crate) struct GameplayPlugin;
 
-impl Plugin for EntitiesPlugin {
+impl Plugin for GameplayPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(OnEnter(GameState::InGame), initial_spawn);
     }

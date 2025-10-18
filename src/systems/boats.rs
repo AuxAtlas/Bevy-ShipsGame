@@ -1,5 +1,5 @@
 use crate::components::stats::speed::MoveSpeedStat;
-use crate::entities::boat::Boat;
+use crate::gameplay::boat::Boat;
 use crate::resources::inputs::InputBuffer;
 use crate::GameState;
 use bevy::prelude::ops::sqrt;
@@ -13,16 +13,16 @@ pub struct BoatSystemsPlugin;
 
 impl Plugin for BoatSystemsPlugin {
     fn build(&self, app: &mut App) {
-        app
-            .add_systems(PhysicsUpdate, move_boat.run_if(in_state(GameState::InGame)));
+        app.add_systems(PhysicsUpdate, move_boat_system.run_if(in_state(GameState::InGame)));
     }
 }
 
 #[main_thread_system]
-pub fn move_boat(
+pub fn move_boat_system(
     mut query: Query<(&mut GodotNodeHandle, &MoveSpeedStat), (With<CharacterBody3DMarker>, With<Boat>)>,
     time: Res<Time>,
-    input_buffer: Res<InputBuffer>) {
+    input_buffer: Res<InputBuffer>,
+) {
     for (mut handle, speed_stat) in query.iter_mut() {
         let mut character = handle.get::<CharacterBody3D>();
 
