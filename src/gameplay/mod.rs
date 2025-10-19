@@ -1,10 +1,11 @@
-use crate::gameplay::boat::{Boat, BoatAssets};
-use crate::systems::debugging::DebugThisTransformMarker;
+use crate::gameplay::gameplay_boats::{Boat, BoatAssets};
+use crate::systems::debug_systems::DebugThisTransformMarker;
 use crate::GameState;
 use bevy::prelude::*;
 use godot_bevy::prelude::GodotScene;
+use crate::components::maker_components::Puppet;
 
-pub mod boat;
+pub mod gameplay_boats;
 
 pub(crate) struct GameplayPlugin;
 
@@ -21,5 +22,6 @@ fn initial_spawn(mut commands: Commands, boat_assets: Res<BoatAssets>) {
         .insert((
             Boat::default(),
             DebugThisTransformMarker,
+            Puppet,
         ));
 }

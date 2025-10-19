@@ -1,12 +1,12 @@
-use crate::systems::boats::BoatSystemsPlugin;
-use crate::systems::debugging::DebuggingPlugin;
-use crate::systems::inputs::InputSystemsPlugin;
+use crate::systems::boat_systems::BoatSystemsPlugin;
+use crate::systems::debug_systems::DebuggingPlugin;
+use crate::systems::input_systems::InputSystemsPlugin;
 use bevy::app::{App, Plugin};
 use godot_bevy::prelude::bevy_prelude::IntoScheduleConfigs;
 
-mod boats;
-pub mod debugging;
-mod inputs;
+mod boat_systems;
+pub mod debug_systems;
+mod input_systems;
 
 pub struct SystemsPlugin;
 

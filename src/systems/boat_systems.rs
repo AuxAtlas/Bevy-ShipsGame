@@ -1,13 +1,14 @@
-use crate::components::stats::speed::MoveSpeedStat;
-use crate::gameplay::boat::Boat;
-use crate::resources::inputs::InputBuffer;
+use crate::components::stats::speed_stats::MoveSpeedStat;
+use crate::gameplay::gameplay_boats::{Boat, BoatNode};
+use crate::resources::input_resources::InputBuffer;
 use crate::GameState;
 use bevy::prelude::ops::sqrt;
 use bevy::prelude::*;
-use godot::classes::CharacterBody3D;
+use godot::classes::{Camera3D, CharacterBody3D};
 use godot::prelude::*;
 use godot_bevy::prelude::*;
 use godot_bevy::utils::lerp;
+use crate::components::maker_components::Puppet;
 
 pub struct BoatSystemsPlugin;
 
@@ -19,12 +20,12 @@ impl Plugin for BoatSystemsPlugin {
 
 #[main_thread_system]
 pub fn move_boat_system(
-    mut query: Query<(&mut GodotNodeHandle, &MoveSpeedStat), (With<CharacterBody3DMarker>, With<Boat>)>,
+    mut query: Query<(&mut GodotNodeHandle, &MoveSpeedStat, &mut Boat), (With<CharacterBody3DMarker>, With<Boat>, With<Puppet>)>,
     time: Res<Time>,
-    input_buffer: Res<InputBuffer>,
+    mut input_buffer: ResMut<InputBuffer>,
 ) {
-    for (mut handle, speed_stat) in query.iter_mut() {
-        let mut character = handle.get::<CharacterBody3D>();
+    for (mut node_handle, speed_stat, mut boat) in query.iter_mut() {
+        let mut character = node_handle.get::<CharacterBody3D>();
 
         let speed = speed_stat.base * speed_stat.multiplier * time.delta_secs();
         let movements = input_buffer.get_movements();
@@ -47,5 +48,13 @@ pub fn move_boat_system(
         character.rotate_object_local(Vector3::UP, -movements.x * time.delta_secs());
 
         character.move_and_slide();
+
+        // Mouse/Look Inputs
+        if boat.turret_socket_handle.is_some() {
+           let mut turret_socket_node = boat.turret_socket_handle.as_mut().unwrap().get::<Node3D>();
+            turret_socket_node.rotate_object_local(Vector3::UP, input_buffer.look_delta.x * time.delta_secs());
+            turret_socket_node.rotate_object_local(Vector3::RIGHT, input_buffer.look_delta.y * time.delta_secs());
+            input_buffer.look_delta = Vec2::ZERO;
+        }
     }
 }

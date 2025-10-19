@@ -35,11 +35,8 @@ material = ExtResource("1_l0eoi")
 top_radius = 0.05
 bottom_radius = 0.125
 
-[node name="DevBoatEntity" type="BoatNode"]
-base_speed = 8.0
-speed_multiplier = 1.0
-health = 100.0
-max_health = 100.0
+[node name="DevBoatEntity" type="BoatNode" node_paths=PackedStringArray("turret_socket")]
+turret_socket = NodePath("TurretSocket")
 axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_z = true
@@ -83,5 +80,9 @@ mesh = SubResource("SphereMesh_l0eoi")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -1.2579846)
 mesh = SubResource("CylinderMesh_kd8yb")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9204639, 0.39082754, 0, -0.39082754, 0.9204639, -2.3841858e-07, 2.1826665, 1.6343489)
+[node name="TurretSocket" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5058501, 0)
+
+[node name="Camera3D" type="Camera3D" parent="TurretSocket"]
+transform = Transform3D(1, 0, 0, 0, 0.93307287, 0.35968745, 0, -0.35968745, 0.93307287, -4.7683716e-07, 2.0561018, 3.2135422)
+current = true

@@ -1,10 +1,10 @@
-use crate::gameplay::boat::BoatAssets;
-use crate::resources::inputs::InputBuffer;
+use crate::gameplay::gameplay_boats::BoatAssets;
+use crate::resources::input_resources::InputBuffer;
 use crate::GameState;
 use bevy::prelude::*;
 use bevy_asset_loader::prelude::{ConfigureLoadingState, LoadingState, LoadingStateAppExt};
 
-pub mod inputs;
+pub mod input_resources;
 
 pub(crate) struct ResourcesPlugin;
 

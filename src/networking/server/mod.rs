@@ -1,6 +1,6 @@
 use crate::networking::common::{LobbyData, NetUser};
-use crate::networking::protocol::channels::common::NetChannels;
-use crate::networking::protocol::messages::common::Packets;
+use crate::networking::protocol::channels::common_channels::NetChannels;
+use crate::networking::protocol::messages::common_messages::Packets;
 use crate::{GameState, GameSystems};
 use bevy::log::warn;
 use bevy_quinnet::client::connection::ConnectionFailedEvent;

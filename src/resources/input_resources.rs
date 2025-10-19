@@ -3,30 +3,31 @@ use godot::prelude::*;
 
 #[derive(Resource, Default)]
 pub struct InputBuffer {
-    pub input_flags : MovementInputFlags,
+    pub flags: MovementInputFlags,
+    pub look_delta: Vec2,
 }
 impl InputBuffer {
     pub fn get_movements(&self) -> Vector3 {
         let mut movement = Vector3::ZERO;
         
-        if(self.input_flags.forward) {
+        if(self.flags.forward) {
             movement.z = 1.0;
         }
-        else if(self.input_flags.backward) {
+        else if(self.flags.backward) {
             movement.z = -1.0;
         }
         
-        if(self.input_flags.left) {
+        if(self.flags.left) {
             movement.x = -1.0;
         }
-        else if(self.input_flags.right) {
+        else if(self.flags.right) {
             movement.x = 1.0;
         }
         
-        if(self.input_flags.up) {
+        if(self.flags.up) {
             movement.y = 1.0;
         }
-        else if(self.input_flags.down) {
+        else if(self.flags.down) {
             movement.y = -1.0;
         }
         

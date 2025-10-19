@@ -13,9 +13,9 @@ use crate::systems::SystemsPlugin;
 use bevy::state::app::StatesPlugin;
 use godot_bevy::prelude::bevy_prelude::{App, AppExtStates, States, SystemSet};
 use godot_bevy::prelude::{
-	godot_prelude::{gdextension, ExtensionLibrary},
-	GodotDefaultPlugins,
-	*,
+    godot_prelude::{gdextension, ExtensionLibrary},
+    GodotDefaultPlugins,
+    *,
 };
 
 #[bevy_app]

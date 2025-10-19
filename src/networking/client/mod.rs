@@ -1,6 +1,6 @@
 use crate::networking::common::{LobbyData, NetUser};
-use crate::networking::protocol::channels::common::NetChannels;
-use crate::networking::protocol::messages::common::Packets;
+use crate::networking::protocol::channels::common_channels::NetChannels;
+use crate::networking::protocol::messages::common_messages::Packets;
 use crate::{GameState, GameSystems};
 use bevy::prelude::{OnEnter, Res};
 use bevy_quinnet::client::certificate::CertificateVerificationMode;
@@ -43,12 +43,11 @@ impl Plugin for NetClientPlugin {
 
 // Functions
 fn start_connection(mut client: ResMut<QuinnetClient>) {
-    client
-        .open_connection(ClientConnectionConfiguration {
+    client.open_connection(ClientConnectionConfiguration {
             addr_config: ClientAddrConfiguration::from_strings("[::1]:7777", "[::]:0").unwrap(),
             cert_mode: CertificateVerificationMode::SkipVerification,
             defaultables: Default::default(),
-        }).expect("Need a valid server address.");
+    }).expect("Need a valid server address.");
 }
 fn client_is_connected(client: Res<QuinnetClient>) -> bool { client.is_connected() }
 
@@ -60,7 +59,6 @@ fn handle_s2c_messages_system(
     mut lobby_data: ResMut<LobbyData>,
 ) {
     if let Some(connection) = client.get_connection_mut() {
-
         while let Some(message) = connection.try_receive_message_on(NetChannels::GameSetup) {
             match message {
                 Packets::LobbyInfo { users } => {
