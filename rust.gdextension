@@ -1,0 +1,13 @@
+[configuration]
+entry_symbol = "gdext_rust_init"
+compatibility_minimum = 4.1
+
+[libraries]
+linux.debug.x86_64 = "res://rust/target/debug/librusty_waters.so"
+linux.release.x86_64 = "res://rust/target/release/librusty_waters.so"
+windows.debug.x86_64 = "res://rust/target/debug/rusty_waters.dll"
+windows.release.x86_64 = "res://rust/target/release/rusty_waters.dll"
+macos.debug = "res://rust/target/debug/librusty_waters.dylib"
+macos.release = "res://rust/target/release/librusty_waters.dylib"
+macos.debug.arm64 = "res://rust/target/debug/librusty_waters.dylib"
+macos.release.arm64 = "res://rust/target/release/librusty_waters.dylib"

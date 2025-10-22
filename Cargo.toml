@@ -1,26 +1,47 @@
 [package]
-name = "rust_ships"
+name = "rusty_waters"
 version = "0.1.0"
 edition = "2021"
 
 [lib]
 crate-type = ["cdylib"]
+path = "rust/core/lib.rs"
 
 [dependencies]
-godot-bevy = "0.8.4"  # Latest with opt-in plugin system
-bevy = { version = "0.16", default-features = false }
-godot = "0.3"
-which = "8.0.0"
-bevy_asset_loader = "0.23.0"
+bevy = { version = "0.16.1", default-features = false, features = [
+    "bevy_asset",
+    "bevy_state",
+    "bevy_gilrs",
+    "multi_threaded",
+] }
+godot = "0.4.0"
+#godot-bevy = { version = "0.9.1" }
+godot-bevy = { git = "https://github.com/bytemeadow/godot-bevy", branch = "main" }
+
 bevy_quinnet = { version = "0.18.1", features = ["bincode-messages"] }
 strum = "0.27.2"
 strum_macros = "0.27.2"
 serde = { version = "1.0.228", features = ["derive"] }
-rand = "0.8.5"
+bevy_asset_loader = "0.23.0"
+which = "8.0.0"
+tracing-tracy = { version = "0.11.4", default-features = false, features = [  # From issue: https://github.com/bytemeadow/godot-bevy/issues/126
+    "enable",
+    "manual-lifetime",
+    "ondemand",
+    "broadcast",
+], optional = true }
 
 [[bin]]
 path = "./run_godot.rs"
 name = "godot"
 
 [workspace]
-# Empty workspace table to make this a standalone project
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+
+[features]
+trace_tracy = ["dep:tracing-tracy", "godot-bevy/trace_tracy"] # From issue: https://github.com/bytemeadow/godot-bevy/issues/126

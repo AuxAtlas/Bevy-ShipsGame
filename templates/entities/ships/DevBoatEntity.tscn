@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=3 uid="uid://dakf2eqxmlgwk"]
+
+[ext_resource type="Material" uid="uid://df32hehy7sldi" path="res://assets/materials/ships/basic_ship_hull.material" id="1_l0eoi"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rcqa3"]
+height = 6.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rcqa3"]
+material = ExtResource("1_l0eoi")
+top_radius = 3.0
+bottom_radius = 3.0
+height = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_l0eoi"]
+material = ExtResource("1_l0eoi")
+top_radius = 0.33
+bottom_radius = 0.33
+height = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jdh7q"]
+top_radius = 0.033
+bottom_radius = 0.033
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l0eoi"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_l0eoi"]
+material = SubResource("StandardMaterial3D_l0eoi")
+radius = 0.01
+height = 0.01
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_kd8yb"]
+material = ExtResource("1_l0eoi")
+top_radius = 0.05
+bottom_radius = 0.125
+
+[node name="DevBoatEntity" type="BoatNode" node_paths=PackedStringArray("turret_camera_socket", "turret_pivot_socket")]
+turret_camera_socket = NodePath("CameraPivot/Camera3D")
+turret_pivot_socket = NodePath("CameraPivot")
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+motion_mode = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_rcqa3")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="HullMesh" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(0.2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_rcqa3")
+skeleton = NodePath("../..")
+
+[node name="CannonMesh" type="Node3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="CannonBaseMesh" type="MeshInstance3D" parent="Model/CannonMesh"]
+mesh = SubResource("CylinderMesh_l0eoi")
+skeleton = NodePath("../..")
+
+[node name="CannonFaceMesh" type="MeshInstance3D" parent="Model/CannonMesh/CannonBaseMesh"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.09827258, 0.14330637, -0.3068196)
+mesh = SubResource("CylinderMesh_jdh7q")
+
+[node name="IrisMesh" type="MeshInstance3D" parent="Model/CannonMesh/CannonBaseMesh/CannonFaceMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0062449574, -0.04834637, 0.011397719)
+mesh = SubResource("SphereMesh_l0eoi")
+
+[node name="CannonFaceMesh2" type="MeshInstance3D" parent="Model/CannonMesh/CannonBaseMesh"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.11200927, 0.14330637, -0.2906623)
+mesh = SubResource("CylinderMesh_jdh7q")
+
+[node name="IrisMesh" type="MeshInstance3D" parent="Model/CannonMesh/CannonBaseMesh/CannonFaceMesh2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00521715, -0.05365321, 0.011397719)
+mesh = SubResource("SphereMesh_l0eoi")
+
+[node name="CannonBarrelMesh" type="MeshInstance3D" parent="Model/CannonMesh"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -1.2579846)
+mesh = SubResource("CylinderMesh_kd8yb")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.93307287, 0.35968745, 0, -0.35968745, 0.93307287, -4.7683716e-07, 2.5619519, 3.2135422)
+current = true

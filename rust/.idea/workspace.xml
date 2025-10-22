@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8ccaf7d3-dd3a-4001-958d-fb30fa623f68" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/../Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../godot/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../godot/assets/materials/ships/basic_ship_hull.material" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../godot/assets/materials/world/basic_water.material" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../godot/icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../godot/icon.svg.import" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../godot/project.godot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../godot/rust.gdextension" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../godot/rust.gdextension.uid" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../godot/scenes/maps/DevMap.scn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../godot/templates/BevyAppSingleton.tscn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../godot/templates/DebuggerDrawer.tscn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../godot/templates/entities/ships/DevBoatEntity.tscn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../run_godot.rs" beforeDir="false" afterPath="$PROJECT_DIR$/../run_godot.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/components/maker_components.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/components/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/components/stats/health_stats.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/components/stats/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/components/stats/speed_stats.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/gameplay/gameplay_boats.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/gameplay/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/lib.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/networking/client/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/networking/common/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/networking/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/networking/protocol/channels/common_channels.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/networking/protocol/channels/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/networking/protocol/messages/common_messages.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/networking/protocol/messages/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/networking/protocol/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/networking/server/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/resources/input_resources.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/resources/mod.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/systems/boat_systems.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/systems/debug_systems.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/systems/input_systems.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/systems/mod.rs" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "AuxAtlas"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/AuxAtlas/Bevy-ShipsGame.git",
+    "accountId": "d11eceed-8b74-46bf-b42b-fe95ab4e5b93"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="34Q1YyqLWuS0Y34LJufv1dy6J2b" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.rust.reset.selective.auto.import": "true",
+    "git-widget-placeholder": "master",
+    "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
+    "org.rust.first.attach.projects": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RustProjectSettings">
+    <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8ccaf7d3-dd3a-4001-958d-fb30fa623f68" name="Changes" comment="" />
+      <created>1761131034125</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1761131034125</updated>
+      <workItem from="1761131035746" duration="9000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
