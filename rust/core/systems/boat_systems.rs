@@ -65,8 +65,9 @@ pub fn move_boat_system(
                 Vector3::RIGHT,
                 input_buffer.look_delta.y * time.delta_secs(),
             );
-            // let turret_x_clamped = turret_socket_node.get_rotation().x.clamp(-1.5, 1.5);
-            // turret_socket_node.rotate_x(turret_x_clamped);
+            let mut turret_rot_clamped = turret_socket_node.get_rotation();
+            turret_rot_clamped.x = turret_rot_clamped.x.clamp(-0.5, 0.5);
+            turret_socket_node.set_rotation(turret_rot_clamped);
             look_at_pos = turret_socket_node.get_global_position();
         }
         if boat.turret_camera_socket.is_some() {
