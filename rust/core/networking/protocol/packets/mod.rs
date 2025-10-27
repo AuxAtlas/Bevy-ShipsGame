@@ -1,6 +1,6 @@
+use std::collections::HashMap;
 use bevy_quinnet::shared::ClientId;
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum Packets {
@@ -15,3 +15,4 @@ pub enum Packets {
         users_added: HashMap<ClientId, String>,
     },
 }
+

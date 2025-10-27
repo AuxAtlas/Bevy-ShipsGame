@@ -1,11 +1,11 @@
 use crate::messages::{PacketData, S2CPacketEvent};
-use crate::networking::protocol::messages::common_messages::Packets;
 use crate::{GameState, GameSystems};
 use bevy::prelude::*;
 use bevy_quinnet::client::certificate::CertificateVerificationMode;
 use bevy_quinnet::client::connection::{ClientAddrConfiguration, ConnectionFailedEvent};
 use bevy_quinnet::client::{ClientConnectionConfiguration, QuinnetClient, QuinnetClientPlugin};
 use bevy_quinnet::server::{ConnectionEvent, ConnectionLostEvent};
+use crate::networking::protocol::packets::Packets;
 
 pub struct NetClientPlugin;
 

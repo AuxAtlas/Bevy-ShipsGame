@@ -1,5 +1,5 @@
-use crate::networking::protocol::messages::common_messages::Packets;
 use bevy::prelude::*;
+use crate::networking::protocol::packets::Packets;
 
 #[derive(Event)]
 pub struct C2SPacketEvent(pub PacketData);
