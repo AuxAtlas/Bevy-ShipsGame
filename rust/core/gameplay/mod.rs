@@ -1,6 +1,6 @@
-use crate::components::maker_components::Puppet;
+use crate::components::maker_components::{DebugThisTransformMarker, Puppet};
 use crate::gameplay::boats_gameplay::{Boat, BoatAssets};
-use crate::systems::debug_systems::DebugThisTransformMarker;
+// use crate::systems::debug_systems::DebugThisTransformMarker;
 use crate::GameState;
 use bevy::prelude::*;
 use godot_bevy::prelude::{main_thread_system, GodotScene};

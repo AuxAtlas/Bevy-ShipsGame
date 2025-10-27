@@ -5,9 +5,9 @@ use godot::prelude::*;
 use godot_bevy::prelude::{main_thread_system, ActionInput, MouseMotion};
 use std::ops::Add;
 
-pub struct InputSystemsPlugin;
+pub struct GameInputSystemsPlugin;
 
-impl Plugin for InputSystemsPlugin {
+impl Plugin for GameInputSystemsPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(
             Update,

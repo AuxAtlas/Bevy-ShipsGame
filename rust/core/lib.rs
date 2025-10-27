@@ -1,19 +1,19 @@
 use crate::gameplay::GameplayPlugin;
-use crate::networking::client::NetClientPlugin;
 use crate::networking::common::LobbyData;
-use crate::networking::server::NetServerPlugin;
-use crate::resources::ResourcesPlugin;
-use crate::systems::SystemsPlugin;
+use crate::networking::GameNetworkingPlugin;
+use crate::resources::GameResourcesPlugin;
+use crate::systems::GameSystemsPlugin;
 use bevy::prelude::*;
 use bevy::state::app::StatesPlugin;
 use godot::prelude::*;
 use godot_bevy::prelude::*;
 
 pub mod components;
-pub mod gameplay;
+mod gameplay;
+pub mod messages;
 pub mod networking;
 pub mod resources;
-pub(crate) mod systems;
+mod systems;
 
 #[bevy_app]
 fn build_app(app: &mut App) {
@@ -22,11 +22,10 @@ fn build_app(app: &mut App) {
     app.init_resource::<LobbyData>()
         .add_plugins((
             StatesPlugin,
-            SystemsPlugin,
-            ResourcesPlugin,
+            GameSystemsPlugin,
+            GameResourcesPlugin,
             GameplayPlugin,
-            NetServerPlugin,
-            NetClientPlugin,
+            GameNetworkingPlugin,
         ))
         .init_state::<GameState>();
 }

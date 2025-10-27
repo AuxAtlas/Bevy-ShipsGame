@@ -1,16 +1,13 @@
-use crate::networking::common::{LobbyData, NetUser};
-use crate::networking::protocol::channels::common_channels::NetChannels;
-use crate::networking::protocol::messages::common_messages::Packets;
+use crate::messages::{C2SPacketEvent, PacketData};
+use crate::networking::common::LobbyData;
 use crate::{GameState, GameSystems};
-use bevy::log::warn;
+use bevy::prelude::*;
 use bevy_quinnet::client::connection::ConnectionFailedEvent;
 use bevy_quinnet::server::certificate::CertificateRetrievalMode;
 use bevy_quinnet::server::{
     ConnectionEvent, ConnectionLostEvent, EndpointAddrConfiguration, QuinnetServer,
     QuinnetServerPlugin, ServerEndpointConfiguration,
 };
-use godot_bevy::prelude::bevy_prelude::*;
-use std::collections::HashMap;
 
 pub struct NetServerPlugin;
 impl Plugin for NetServerPlugin {
@@ -25,7 +22,7 @@ impl Plugin for NetServerPlugin {
             );
             schedule.add_systems(start_listening_system);
         });
-        app.edit_schedule(FixedUpdate, |schedule| {
+        app.edit_schedule(Update, |schedule| {
             schedule.configure_sets(
                 GameSystems::HostSystems
                     .run_if(in_state(GameState::InGame))
@@ -33,7 +30,7 @@ impl Plugin for NetServerPlugin {
             );
             schedule.add_systems(
                 ((
-                    handle_c2s_messages_system,
+                    handle_c2s_packets_system,
                     server_handle_network_events_system,
                 )
                     .chain(),)
@@ -44,64 +41,72 @@ impl Plugin for NetServerPlugin {
 }
 
 // Systems
-fn handle_c2s_messages_system(
+fn handle_c2s_packets_system(
     mut server: ResMut<QuinnetServer>,
-    mut lobby_data: ResMut<LobbyData>,
+    mut c2s_packet_event: EventWriter<C2SPacketEvent>,
 ) {
     let endpoint = server.endpoint_mut();
     for client_id in endpoint.clients() {
-        while let Some(message) =
-            endpoint.try_receive_message_from(client_id, NetChannels::GameSetup)
-        {
-            match message {
-                Packets::Hello { username } => {
-                    if lobby_data.users.contains_key(&client_id) {
-                        warn!(
-                            "Received 'hello' packet from an existing client id {}",
-                            client_id
-                        )
-                    } else {
-                        lobby_data.users.insert(
-                            client_id,
-                            NetUser {
-                                username: username.clone(),
-                            },
-                        );
-                        println!("User '{}' joined.", username);
-                        endpoint
-                            .send_message_on(
-                                client_id,
-                                NetChannels::GameSetup,
-                                Packets::LobbyInfo {
-                                    users: lobby_data
-                                        .users
-                                        .clone()
-                                        .into_iter()
-                                        .map(|(k, v)| (k, v.username))
-                                        .collect(),
-                                },
-                            )
-                            .unwrap();
-
-                        endpoint
-                            .send_group_message_on(
-                                lobby_data.users.keys().filter(|&x| x != &client_id),
-                                NetChannels::GameSetup,
-                                Packets::LobbyInfoDelta {
-                                    users_removed: vec![],
-                                    users_added: HashMap::from([(client_id, username)]),
-                                },
-                            )
-                            .unwrap();
-                    }
-                }
-                _ => println!(
-                    "[Handle C2S Message] Unknown Packet Received: {:?}",
-                    message
-                ),
-            }
+        while let Some(message) = endpoint.try_receive_message(client_id) {
+            c2s_packet_event.write(C2SPacketEvent(PacketData {
+                sender_id: client_id,
+                packet: message,
+            }));
         }
     }
+
+    // while let Some(message) =
+    //     endpoint.try_receive_message_from(client_id, NetChannels::GameSetup)
+    // {
+    //     match message {
+    //         Packets::Hello { username } => {
+    //             if lobby_data.users.contains_key(&client_id) {
+    //                 warn!(
+    //                     "Received 'hello' packet from an existing client id {}",
+    //                     client_id
+    //                 )
+    //             } else {
+    //                 lobby_data.users.insert(
+    //                     client_id,
+    //                     NetUser {
+    //                         username: username.clone(),
+    //                     },
+    //                 );
+    //                 println!("User '{}' joined.", username);
+    //                 endpoint
+    //                     .send_message_on(
+    //                         client_id,
+    //                         NetChannels::GameSetup,
+    //                         Packets::LobbyInfo {
+    //                             users: lobby_data
+    //                                 .users
+    //                                 .clone()
+    //                                 .into_iter()
+    //                                 .map(|(k, v)| (k, v.username))
+    //                                 .collect(),
+    //                         },
+    //                     )
+    //                     .unwrap();
+    //
+    //                 endpoint
+    //                     .send_group_message_on(
+    //                         lobby_data.users.keys().filter(|&x| x != &client_id),
+    //                         NetChannels::GameSetup,
+    //                         Packets::LobbyInfoDelta {
+    //                             users_removed: vec![],
+    //                             users_added: HashMap::from([(client_id, username)]),
+    //                         },
+    //                     )
+    //                     .unwrap();
+    //             }
+    //         }
+    //         _ => println!(
+    //             "[Handle C2S Message] Unknown Packet Received: {:?}",
+    //             message
+    //         ),
+    //     }
+    // }
+    // }
 }
 
 fn server_handle_network_events_system(

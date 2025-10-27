@@ -1,5 +1,4 @@
-use crate::networking::common::{LobbyData, NetUser};
-use crate::networking::protocol::channels::common_channels::NetChannels;
+use crate::messages::{PacketData, S2CPacketEvent};
 use crate::networking::protocol::messages::common_messages::Packets;
 use crate::{GameState, GameSystems};
 use bevy::prelude::*;
@@ -16,7 +15,7 @@ impl Plugin for NetClientPlugin {
 
         app.add_systems(OnEnter(GameState::InGame), start_connection);
 
-        app.edit_schedule(FixedUpdate, |schedule| {
+        app.edit_schedule(Update, |schedule| {
             schedule.configure_sets(
                 GameSystems::ClientSystems
                     .run_if(in_state(GameState::InGame))
@@ -51,41 +50,45 @@ fn client_is_connected(client: Res<QuinnetClient>) -> bool {
 // Systems
 fn handle_s2c_messages_system(
     mut client: ResMut<QuinnetClient>,
-    mut lobby_data: ResMut<LobbyData>,
+    mut s2c_packet_event: EventWriter<S2CPacketEvent>,
 ) {
     if let Some(connection) = client.get_connection_mut() {
-        while let Some(message) = connection.try_receive_message_on(NetChannels::GameSetup) {
-            match message {
-                Packets::LobbyInfo { users } => {
-                    lobby_data.users = users
-                        .into_iter()
-                        .map(|(k, v)| (k, NetUser { username: v }))
-                        .collect();
-                }
-                Packets::LobbyInfoDelta {
-                    users_added,
-                    users_removed,
-                } => {
-                    for usr_id in users_removed {
-                        if lobby_data.users.contains_key(&usr_id) {
-                            lobby_data.users.remove(&usr_id);
-                        } else {
-                            println!("Attempted to remove non existing lobby user: {}", usr_id);
-                        }
-                    }
-                    for usr in users_added {
-                        if lobby_data.users.contains_key(&usr.0) {
-                            println!("Attempted to add an existing lobby user: {}", usr.0);
-                        } else {
-                            lobby_data.users.insert(usr.0, NetUser { username: usr.1 });
-                        }
-                    }
-                }
-                _ => println!(
-                    "[Handle S2C Message] Unknown Packet Received: {:?}",
-                    message
-                ),
-            }
+        while let Some(message) = connection.try_receive_message() {
+            s2c_packet_event.write(S2CPacketEvent(PacketData {
+                sender_id: 0,
+                packet: message,
+            }));
+            // match message {
+            //     Packets::LobbyInfo { users } => {
+            //         lobby_data.users = users
+            //             .into_iter()
+            //             .map(|(k, v)| (k, NetUser { username: v }))
+            //             .collect();
+            //     }
+            //     Packets::LobbyInfoDelta {
+            //         users_added,
+            //         users_removed,
+            //     } => {
+            //         for usr_id in users_removed {
+            //             if lobby_data.users.contains_key(&usr_id) {
+            //                 lobby_data.users.remove(&usr_id);
+            //             } else {
+            //                 println!("Attempted to remove non existing lobby user: {}", usr_id);
+            //             }
+            //         }
+            //         for usr in users_added {
+            //             if lobby_data.users.contains_key(&usr.0) {
+            //                 println!("Attempted to add an existing lobby user: {}", usr.0);
+            //             } else {
+            //                 lobby_data.users.insert(usr.0, NetUser { username: usr.1 });
+            //             }
+            //         }
+            //     }
+            //     _ => println!(
+            //         "[Handle S2C Message] Unknown Packet Received: {:?}",
+            //         message
+            //     ),
+            // }
         }
     }
 }
@@ -105,7 +108,7 @@ fn client_handle_network_events_system(
         );
         client
             .connection_mut()
-            .send_message_on(NetChannels::GameSetup, Packets::Hello { username })
+            .send_message(Packets::Hello { username })
             .unwrap();
     }
 

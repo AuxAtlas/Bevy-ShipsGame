@@ -6,9 +6,9 @@ use bevy_asset_loader::prelude::*;
 
 pub mod input_resources;
 
-pub(crate) struct ResourcesPlugin;
+pub(crate) struct GameResourcesPlugin;
 
-impl Plugin for ResourcesPlugin {
+impl Plugin for GameResourcesPlugin {
     fn build(&self, app: &mut App) {
         app.add_loading_state(
             LoadingState::new(GameState::Loading)

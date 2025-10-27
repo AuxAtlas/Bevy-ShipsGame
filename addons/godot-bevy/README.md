@@ -5,16 +5,19 @@ This Godot editor plugin provides tools to seamlessly integrate Bevy ECS with yo
 ## Features
 
 ### 🚀 Project Scaffolding
+
 - **One-click Rust project setup** - Creates complete Cargo.toml, lib.rs, and build scripts
 - **Customizable plugin selection** - Choose between GodotDefaultPlugins or pick individual features
 - **Platform-aware configuration** - Generates correct .gdextension file for all platforms
 
 ### 🎮 BevyApp Singleton Management
+
 - **Automatic registration** - BevyAppSingleton is automatically added to autoload when plugin is enabled
 - **No manual setup required** - Singleton is managed by the plugin lifecycle
 - **Scene-based configuration** - Easy to modify and extend
 
 ### 🛠️ Development Tools
+
 - **Build script generation** - Creates platform-specific build scripts
 - **Feature flag management** - Visual selection of godot-bevy features
 
@@ -30,13 +33,14 @@ This Godot editor plugin provides tools to seamlessly integrate Bevy ECS with yo
 
 1. Go to **Project > Tools > Setup Godot-Bevy Project**
 2. Configure your project:
-   - Project name (used for Rust crate name)
-   - godot-bevy version
-   - Plugin configuration (defaults or custom)
-   - Build type (debug/release)
+    - Project name (used for Rust crate name)
+    - godot-bevy version
+    - Plugin configuration (defaults or custom)
+    - Build type (debug/release)
 3. Click "Create Project"
 
 The plugin will:
+
 - Create a `rust/` directory with your Bevy project
 - Generate Cargo.toml with selected features
 - Create a starter lib.rs with example system
@@ -47,6 +51,7 @@ The plugin will:
 ### BevyApp Singleton
 
 The BevyAppSingleton is automatically managed:
+
 - **Automatically registered** when the plugin is enabled
 - **Automatically removed** when the plugin is disabled
 - **No manual setup required** - just enable the plugin!
@@ -85,6 +90,7 @@ cargo build --release
 ## Customization
 
 The generated lib.rs includes:
+
 - Basic Bevy app setup with selected plugins
 - Example "Hello World" system
 - Proper GDExtension initialization
@@ -94,6 +100,7 @@ Modify it to add your game logic!
 ## Plugin Configuration
 
 When not using defaults, you can individually select:
+
 - `GodotAssetsPlugin` - Asset loading through Bevy
 - `GodotTransformSyncPlugin` - Transform synchronization
 - `GodotCollisionsPlugin` - Collision detection

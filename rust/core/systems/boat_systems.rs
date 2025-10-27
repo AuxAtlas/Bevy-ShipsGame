@@ -8,9 +8,9 @@ use godot::prelude::*;
 use godot_bevy::prelude::bevy_prelude::*;
 use godot_bevy::prelude::*;
 
-pub struct BoatSystemsPlugin;
+pub struct GameBoatSystemsPlugin;
 
-impl Plugin for BoatSystemsPlugin {
+impl Plugin for GameBoatSystemsPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(
             PhysicsUpdate,
@@ -40,16 +40,17 @@ pub fn move_boat_system(
         let mut add_vel_inputs = Vector3::ZERO;
         let mut add_rot_input = 0.0;
 
-
         if let Some(input_movements) = movements {
-            add_vel_inputs = input_movements.z * -character.get_basis().col_c() * speed_stat.acceleration * time.delta_secs();
+            add_vel_inputs = input_movements.z
+                * -character.get_basis().col_c()
+                * speed_stat.acceleration
+                * time.delta_secs();
             add_rot_input = input_movements.x;
         }
 
         if vel.length_squared() < max_speed && movements.is_some() {
             vel += add_vel_inputs;
-        }
-        else {
+        } else {
             vel = vel.move_toward(Vector3::ZERO, speed_stat.deceleration * time.delta_secs());
         }
 
