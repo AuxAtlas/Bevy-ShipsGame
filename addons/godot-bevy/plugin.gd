@@ -58,7 +58,7 @@ func _on_project_created(project_info: Dictionary):
 
 func _scaffold_rust_project(info: Dictionary):
 	var base_path = ProjectSettings.globalize_path("res://")
-	var rust_path = base_path.path_join("rust")
+	var rust_path = base_path
 	var cargo_toml_path = rust_path.path_join("Cargo.toml")
 
 	# Check if Rust project already exists
@@ -170,7 +170,7 @@ func _on_build_rust():
 
 func _build_rust_project(release_build: bool):
 	var base_path = ProjectSettings.globalize_path("res://")
-	var rust_path = base_path.path_join("rust")
+	var rust_path = base_path
 
 	# Check if rust directory exists
 	if not DirAccess.dir_exists_absolute(rust_path):

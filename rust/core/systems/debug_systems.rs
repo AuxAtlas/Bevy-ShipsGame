@@ -36,7 +36,7 @@ pub fn debugger_update_system(
     input_buffer: Res<InputBuffer>,
 ) {
     let mut debug_text: String = String::from("[DEBUG]\n");
-    debug_text.push_str(format!("INPUT_MOVEMENTS: {}\n", input_buffer.get_movements()).as_str());
+    debug_text.push_str(format!("INPUT_MOVEMENTS: {}\n", input_buffer.get_movements().unwrap_or(Vector3::ZERO)).as_str());
     debug_text.push_str(format!("MOUSE_BUFFER: {}\n", input_buffer.look_delta).as_str());
     for mut debug_node in q_debug_this_transform.iter_mut() {
         let vel = debug_node.get::<CharacterBody3D>().get_velocity();

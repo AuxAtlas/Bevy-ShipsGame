@@ -1,11 +1,11 @@
 use crate::components::maker_components::Puppet;
-use crate::gameplay::gameplay_boats::{Boat, BoatAssets};
+use crate::gameplay::boats_gameplay::{Boat, BoatAssets};
 use crate::systems::debug_systems::DebugThisTransformMarker;
 use crate::GameState;
 use bevy::prelude::*;
 use godot_bevy::prelude::{main_thread_system, GodotScene};
 
-pub mod gameplay_boats;
+pub mod boats_gameplay;
 
 pub(crate) struct GameplayPlugin;
 

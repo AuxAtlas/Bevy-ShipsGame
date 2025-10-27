@@ -1,4 +1,4 @@
-use crate::gameplay::gameplay_boats::BoatAssets;
+use crate::gameplay::boats_gameplay::BoatAssets;
 use crate::resources::input_resources::InputBuffer;
 use crate::GameState;
 use bevy::prelude::*;

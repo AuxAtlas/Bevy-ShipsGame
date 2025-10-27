@@ -7,7 +7,7 @@ pub struct InputBuffer {
     pub look_delta: Vec2,
 }
 impl InputBuffer {
-    pub fn get_movements(&self) -> Vector3 {
+    pub fn get_movements(&self) -> Option<Vector3> {
         let mut movement = Vector3::ZERO;
 
         if self.flags.forward {
@@ -28,7 +28,10 @@ impl InputBuffer {
             movement.y = -1.0;
         }
 
-        movement
+        if movement.is_zero_approx() {
+            return None;
+        }
+        Some(movement)
     }
 }
 

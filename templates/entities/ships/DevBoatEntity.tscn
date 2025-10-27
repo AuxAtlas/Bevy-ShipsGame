@@ -36,6 +36,9 @@ top_radius = 0.05
 bottom_radius = 0.125
 
 [node name="DevBoatEntity" type="BoatNode" node_paths=PackedStringArray("turret_camera_socket", "turret_pivot_socket")]
+base_speed = 6.0
+acceleration = 3.0
+deceleration = 1.5
 turret_camera_socket = NodePath("CameraPivot/Camera3D")
 turret_pivot_socket = NodePath("CameraPivot")
 axis_lock_linear_y = true
