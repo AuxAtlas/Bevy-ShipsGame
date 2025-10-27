@@ -5,7 +5,7 @@ use crate::resources::input_resources::InputBuffer;
 use crate::GameState;
 use godot::classes::{Camera3D, CharacterBody3D};
 use godot::prelude::*;
-use godot_bevy::prelude::bevy_prelude::*;
+use bevy::prelude::*;
 use godot_bevy::prelude::*;
 
 pub struct GameBoatSystemsPlugin;
